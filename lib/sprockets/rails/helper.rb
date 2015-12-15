@@ -118,7 +118,9 @@ module Sprockets
                   super(path_to_javascript(a.logical_path, :debug => true), options)
                 end
               else
-                super(path_to_javascript(asset.logical_path, :debug => true), options)
+                x = path_to_javascript(asset.logical_path, :debug => true)
+                request.push method: 'GET', path: x, scheme: 'https'
+                super(x, options)
               end
             else
               super(source, options)
@@ -147,7 +149,9 @@ module Sprockets
                   super(path_to_stylesheet(a.logical_path, :debug => true), options)
                 end
               else
-                super(path_to_stylesheet(asset.logical_path, :debug => true), options)
+                x = path_to_stylesheet(asset.logical_path, :debug => true)
+                request.push method: 'GET', path: x, scheme: 'https'
+                super(x, options)
               end
             else
               super(source, options)
